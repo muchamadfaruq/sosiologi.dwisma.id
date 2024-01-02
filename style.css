@@ -74,7 +74,8 @@ nav ul {
   align-items: center;
 }
 
-nav ul li {}
+nav ul li {
+}
 
 nav ul li a {
   color: black;
@@ -128,6 +129,13 @@ section {
   font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
   color: #364f6b;
   text-align: center;
+}
+
+.kolom a:hover {
+  color: blue;
+  text-decoration: underline;
+  text-align: center;
+  font-weight: bold;
 }
 
 a.tbl-biru {
@@ -322,6 +330,12 @@ a.tbl-pink:hover {
   }
 
   .kolom {
+    display: 50%;
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+
+  .wrapper p.deskripsi {
     display: 50%;
     margin-top: 20px;
     margin-bottom: 20px;
