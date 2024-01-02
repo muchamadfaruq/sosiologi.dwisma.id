@@ -110,22 +110,18 @@ nav ul li a:hover {
 .wrapper {
   width: auto;
   padding: 0 10px 0 10px;
-  margin: 50px 0 0 0;
   position: relative;
 }
 
 section {
-  margin: auto;
+  margin-top: 4rem;
+  margin-bottom: auto;
+  margin-left: auto;
+  margin-right: auto;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 50px;
   padding: 1rem;
-}
-
-.kolom {
-  margin-top: 50px;
-  margin-bottom: 50px;
 }
 
 .kolom .deskripsi {
@@ -286,6 +282,15 @@ a.tbl-pink:hover {
 
   /* Navigasi */
 
+  nav {
+    margin: 0;
+    padding: 0;
+  }
+
+  .logo {
+    display: none;
+  }
+
   .logo,
   a,
   span {
@@ -294,30 +299,31 @@ a.tbl-pink:hover {
   }
 
   .menu {
-    display: none;
+    margin: 0;
+    display: inline-block;
   }
 
   nav ul {
+    margin: 0;
     overflow: hidden;
     text-align: center;
   }
 
   nav ul li {
     float: none;
-    display: inline-block;
+    display: block;
   }
 
   /* isi */
 
   .wrapper {
-    padding-top: 5rem;
-    margin-top: 5rem;
     margin: 0;
     padding: 0;
   }
 
   section {
     flex-direction: column;
+    margin-top: 4rem;
   }
 
   /* Tombol */
@@ -337,13 +343,11 @@ a.tbl-pink:hover {
 
   .kolom {
     display: 50%;
-    margin-top: 20px;
     margin-bottom: 20px;
   }
 
   .wrapper p.deskripsi {
     display: 50%;
-    margin-top: 20px;
     margin-bottom: 20px;
   }
 
