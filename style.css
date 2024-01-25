@@ -268,7 +268,7 @@ a.tbl-pink:hover {
   text-align: left;
 }
 
-@media only screen and (max-width: 1100px) {
+@media only screen and (max-width: 1000px) {
   body {
     width: auto;
     min-height: 200px;
