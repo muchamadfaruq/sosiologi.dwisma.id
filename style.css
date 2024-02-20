@@ -79,9 +79,6 @@ nav ul {
   align-items: center;
 }
 
-nav ul li {
-}
-
 nav ul li a {
   color: black;
   font-weight: bold;
@@ -216,8 +213,8 @@ a.tbl-pink:hover {
 }
 
 .kartu-link img {
-  width: 130px;
-  padding: 30px;
+  height: 100px;
+  padding: 10px;
 }
 
 /* Partner */
