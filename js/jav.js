@@ -45,10 +45,10 @@ document.addEventListener("DOMContentLoaded", function() {
                             aria-expanded="false">Kelas
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end">
-                            <li><a class=" nav-link disabled dropdown-item" aria-disabled="true" href="#">Kelas 10</a>
+                            <li><a class=" nav-link dropdown-item" href="/kelas/fase-e.html">Kelas 10</a>
                             </li>
-                            <li><a class="nav-link dropdown-item" href="/fase-f.html">Kelas 11</a></li>
-                            <li><a class="nav-link dropdown-item" href="/fase-f2.html">Kelas 12</a></li>
+                            <li><a class="nav-link dropdown-item" href="/kelas/fase-f.html">Kelas 11</a></li>
+                            <li><a class="nav-link dropdown-item" href="/kelas/fase-f2.html">Kelas 12</a></li>
                         </ul>
                     </li>
                     <li class="nav-item dropdown">
@@ -63,6 +63,10 @@ document.addEventListener("DOMContentLoaded", function() {
                             </li>
                         </ul>
                     </li>
+                    <form class="d-flex" role="search">
+                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-success" type="submit">Search</button>
+                    </form>
                 </ul>
             </div>
         </div>
@@ -95,11 +99,11 @@ document.addEventListener("DOMContentLoaded", function() {
     </nav>
     `;
 
-    document.getElementById("head-container").innerHTML = headHTML;
+    document.getElementById("head-js").innerHTML = headHTML;
 
-    document.getElementById("navigasi-container").innerHTML = navigasiHTML;
+    document.getElementById("navigasi-js").innerHTML = navigasiHTML;
 
-    document.getElementById("footer-container").innerHTML = footerHTML;
+    document.getElementById("footer-js").innerHTML = footerHTML;
 });
 
         // Dark & Light Mode Toogle
