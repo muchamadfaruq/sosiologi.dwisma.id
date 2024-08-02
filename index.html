@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" data-bs-theme="dark">
+<html lang="en">
 
 <head>
     <meta charset="utf-8">
@@ -14,16 +14,30 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 </head>
 
-<body>
+<body data-bs-theme="light">
+
     <!-- Navigasi -->
     <nav class="navbar navbar-expand-lg bg-body-tertiary shadow fixed-top">
         <div class="container-fluid">
-            <a class="navbar-brand fw-bold text-primary" href="#">belajar<span
-                    class="text-danger">sosiologi.my.id</span></a>
+
+            <!-- Dark Button -->
+            <div class="form-check form-switch mx-4">
+                <input class="form-check-input p-2" type="checkbox" role="switch" id="flexSwitchCheckChecked" checked
+                    onclick="myFunction()" />
+            </div>
+
+            <!-- Logo -->
+            <div class="navbar-brand fw-bold text-primary" href="#">belajar<span
+                    class="text-danger">sosiologi.my.id</span>
+            </div>
+
+            <!-- Humburger Menu -->
             <button class="navbar-toggler btn-sm" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
+
+            <!-- Menu Kanan -->
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item"><a class="nav-link active" href="index.html">Beranda</a></li>
@@ -55,13 +69,25 @@
             </div>
         </div>
     </nav>
+    <!-- Navigasi End -->
 
     <!-- Isi -->
-    <div class="container">
+    <div class="container-fluid">
+
+        <!-- Dirgahayu Indonesia -->
         <div class="container-fluid mt-5 text-center">
             <img src="https://i.pinimg.com/originals/c9/8e/55/c98e55d2b5e5ed0e36d6e2a4be067eb1.png" alt="">
-            <h2 class="fw-bold">Dirgahayu Indonesia</h2>
+            <h2 class="fw-bold display-1 text-danger">Dirgahayu Republik Indonesia</h2>
         </div>
+
+        <!-- clock -->
+        <div class="time text-center fw-bold fs-5 m-5">
+            <span class="hms"></span>
+            <span class="ampm"></span><br>
+            <span class="date text-uppercase"></span>
+        </div>
+
+        <!-- Tetap Semangat -->
         <div class="container-fluid mt-5">
             <h1>Tetap Sehat Tetap Semangat</h1>
             <p>Menggali kajian sosiologi adalah seperti menjelajahi alam semesta manusia. Setiap konsep dan teori
@@ -78,6 +104,7 @@
                 Belajar</a>
         </div>
 
+        <!-- Permainan Sosiologi -->
         <div class="container-fluid mt-5">
             <div class="container-fluid text-start">
                 <h1>Permainan Sosiologi</h1>
@@ -101,6 +128,7 @@
             </div>
         </div>
 
+        <!-- Kurikulum Merdeka -->
         <section id="merdeka" class="container-fluid">
             <h1 class="mt-5">Kenapa harus kurikulum merdeka ??</h1>
             <p class="text-start">Untuk mendukung visi pendidikan Indonesia, dan sebagai bagian dari upaya pemulihan
@@ -118,7 +146,7 @@
     </div>
 
     <!-- footer -->
-    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <nav class="navbar navbar-expand-lg bg-body-tertiary mt-5">
         <div class="container-fluid">
             <a class="navbar-brand" href="https://sman2mengwi.sch.id/" target="_blank"><img src="/img/logo.png"
                     width="50" height="50"></a>
@@ -145,6 +173,78 @@
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
 
         </script>
+
+    <script>
+        // Dark & Light Mode Toogle
+        function myFunction() {
+            var element = document.body;
+            element.dataset.bsTheme =
+                element.dataset.bsTheme == "light" ? "dark" : "light";
+        }
+
+        // Mesin Jam
+        function updateTime() {
+            var dateInfo = new Date();
+
+            /* time */
+            var hr,
+                _min = (dateInfo.getMinutes() < 10) ? "0" + dateInfo.getMinutes() : dateInfo.getMinutes(),
+                sec = (dateInfo.getSeconds() < 10) ? "0" + dateInfo.getSeconds() : dateInfo.getSeconds(),
+                ampm = (dateInfo.getHours() >= 12) ? "PM" : "AM";
+
+            // replace 0 with 12 at midnight, subtract 12 from hour if 13–23
+            if (dateInfo.getHours() == 0) {
+                hr = 12;
+            } else if (dateInfo.getHours() > 12) {
+                hr = dateInfo.getHours() - 12;
+            } else {
+                hr = dateInfo.getHours();
+            }
+
+            var currentTime = hr + ":" + _min + ":" + sec;
+
+            // print time
+            document.getElementsByClassName("hms")[0].innerHTML = currentTime;
+            document.getElementsByClassName("ampm")[0].innerHTML = ampm;
+
+            /* date */
+            var dow = [
+                "Minggu",
+                "Senin",
+                "Selasa",
+                "Rabu",
+                "Kamis",
+                "Jumat",
+                "Sabtu"
+            ],
+                month = [
+                    "Januari",
+                    "Februari",
+                    "Maret",
+                    "April",
+                    "Mei",
+                    "Juni",
+                    "Juli",
+                    "Agustus",
+                    "September",
+                    "Oktober",
+                    "November",
+                    "Desember"
+                ],
+                day = dateInfo.getDate();
+
+            // store date
+            var currentDate = dow[dateInfo.getDay()] + ", " + day + " " + month[dateInfo.getMonth()] + " 2024";
+
+            document.getElementsByClassName("date")[0].innerHTML = currentDate;
+        };
+
+        // print time and date once, then update them every second
+        updateTime();
+        setInterval(function () {
+            updateTime()
+        }, 1000);
+    </script>
 </body>
 
 </html>
