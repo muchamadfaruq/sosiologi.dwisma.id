@@ -1,0 +1,5 @@
+{
+    "editor.defaultFormatter": "vscode.html-language-features",
+    "editor.formatOnPaste": false,
+    "editor.formatOnSave": true
+}

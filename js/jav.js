@@ -63,10 +63,15 @@ document.addEventListener("DOMContentLoaded", function() {
                             </li>
                         </ul>
                     </li>
-                    <form class="d-flex" role="search">
-                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-success" type="submit">Search</button>
-                    </form>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">Sispala
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li><a class="nav-link dropdown-item disabled" aria-disabled="true" href="/sispala/profile.html">profile</a></li>
+                            <li><a class="nav-link dropdown-item disabled" aria-disabled="true" href="/sispala/berita.html">berita</a></li>
+                        </ul>
+                    </li>
                 </ul>
             </div>
         </div>
