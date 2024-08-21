@@ -6,11 +6,13 @@ document.addEventListener("DOMContentLoaded", function() {
     <title>belajarsosiologi.my.id</title>
 
     <!-- Botstrap -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Bootstrap icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    
+    <!-- My Style -->
+    <link rel="stylesheet" href="/css/style.css">
     </head>
     `;
     
@@ -81,6 +83,9 @@ document.addEventListener("DOMContentLoaded", function() {
 
     const footerHTML =`   
     <!-- footer -->
+        <!-- Tombol WA -->
+    <a class="btn btn-success floating-btn btn-lg" href="https://wa.me/6287765881000" target="_blank"><i
+            class="bi bi-whatsapp m-1"></i></a>
     <nav class="navbar navbar-expand-lg bg-body-tertiary mt-5">
         <div class="container-fluid">
             <a class="navbar-brand" href="https://sman2mengwi.sch.id/" target="_blank"><img src="/img/logo.png"
