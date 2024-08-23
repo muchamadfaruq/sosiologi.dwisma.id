@@ -86,7 +86,7 @@ document.addEventListener("DOMContentLoaded", function() {
         <!-- Tombol WA -->
     <a class="btn btn-success floating-btn btn-lg" href="https://wa.me/6287765881000" target="_blank"><i
             class="bi bi-whatsapp m-1"></i></a>
-            
+
     <nav class="navbar navbar-expand-lg bg-body-tertiary mt-5">
         <div class="container-fluid">
             <a class="navbar-brand" href="https://sman2mengwi.sch.id/" target="_blank"><img src="/img/logo.png"
