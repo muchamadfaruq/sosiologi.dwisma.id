@@ -14,7 +14,3 @@ h5,
 h6 {
   text-transform: capitalize;
 }
-
-.btn-violet {
-  background-color: --bs-purple;
-}

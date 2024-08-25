@@ -1,4 +1,7 @@
+// Kerangka Web
 document.addEventListener("DOMContentLoaded", function() {
+
+    // Head
     const headHTML =`
     <head>
     <meta charset="utf-8">
@@ -16,6 +19,7 @@ document.addEventListener("DOMContentLoaded", function() {
     </head>
     `;
     
+    // Navigasi
     const navigasiHTML = `
     <!-- Navigasi -->
     <nav class="navbar navbar-expand-lg bg-body-tertiary shadow fixed-top">
@@ -42,34 +46,39 @@ document.addEventListener("DOMContentLoaded", function() {
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item"><a class="nav-link" href="/index.html">Beranda</a></li>
+
+                    <!-- Fase E -->
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                            aria-expanded="false">Materi
+                            aria-expanded="false">Fase E
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end">
-                            <li><a class="text-uppercase fw-bold nav-link dropdown-item" href="/kelas/fase-e.html">Kelas
-                                    10</a>
+                            <li><a class="nav-link dropdown-item" href="/materi/fase-e.html">Kelas X</a>
                             </li>
-                            <li><a class="nav-link dropdown-item fw-bold text-uppercase" href="#">Kelas
-                                    11</a></li>
-                            <ol>
-                                <li><a class="nav-link dropdown-item" href="/kelas/fase-f-kelompoksosial.html">Kelompok
-                                        Sosial</a></li>
-                                <li><a class="nav-link dropdown-item" href="/kelas/fase-f-masalahsosial.html">Masalah
-                                        Sosial</a></li>
-                                <li><a class="nav-link dropdown-item" href="/kelas/fase-f-konfliksosial.html">Konflik
-                                        Sosial</a></li>
-                                <li><a class="nav-link dropdown-item" href="/kelas/fase-f-harmonisosial.html">Harmoni
-                                        Sosial</a></li>
-                            </ol>
-                            <li><a class="text-uppercase fw-bold nav-link dropdown-item"
-                                    href="#">Kelas 12</a></li>
-                            <ol>
-                                <li><a class="nav-link dropdown-item"
-                                        href="/kelas/fase-f2-perubahansosial.html">Perubahan
-                                        Sosial</a></li>
                         </ul>
                     </li>
+
+                    <!-- Fase F -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">Fase F
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li><a class="nav-link dropdown-item" href="/materi/fase-f-kelompoksosial.html">Kelompok
+                                    Sosial</a>
+                            <li><a class="nav-link dropdown-item" href="/materi/fase-f-masalahsosial.html">Masalah
+                                    Sosial</a>
+                            <li><a class="nav-link dropdown-item" href="/materi/fase-f-konfliksosial.html">Konflik
+                                    Sosial</a>
+                            <li><a class="nav-link dropdown-item" href="/materi/fase-f-harmonisosial.html">Harmoni
+                                    Sosial</a>
+                            <li><a class="nav-link dropdown-item" href="/materi/fase-f2-perubahansosial.html">Perubahan
+                                    Sosial</a>
+                            <li><a class="nav-link dropdown-item" href="#">Globalisasi</a>
+                            </li>
+                        </ul>
+                    </li>
+
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                             aria-expanded="false">Coding
@@ -100,6 +109,7 @@ document.addEventListener("DOMContentLoaded", function() {
     <!-- Navigasi End -->
     `;
 
+    // Footer
     const footerHTML =`   
 
     <nav class="navbar navbar-expand-lg bg-body-tertiary mt-5">
@@ -130,6 +140,101 @@ document.addEventListener("DOMContentLoaded", function() {
     document.getElementById("navigasi-js").innerHTML = navigasiHTML;
 
     document.getElementById("footer-js").innerHTML = footerHTML;
+});
+
+// Capaian Pembelajaran Fase E
+document.addEventListener("DOMContentLoaded", function() {
+
+    const capaianeHTML=`
+    
+    <!-- Capaian Pembelajaran Start -->
+    <div id="atas" class="container my-5">
+        <br><br>
+        <h1 class="mb-5 text-center fw-bold">SELAMAT DATANG DI FASE E</h1>
+        <h1 id="capaianpembelajaran">Capaian Pembelajaran</h1>
+        <p class="text-start">Pada akhir fase F, peserta didik mampu memahami berbagai permasalahan
+            sosial yang terjadi. Peserta didik juga mampu menerapkan prinsip kesetaraan dalam perbedaan sosial
+            sehingga terwujud kehidupan sosial yang harmonis, memahami penyebab konflik dan kekerasan serta upaya
+            untuk menciptakan integrasi sosial di tengah dinamika masyarakat digital yang terus berubah. Peserta
+            didik mampu memahami berbagai perubahan sosial, dan eksistensi kearifan lokal dalam kehidupan komunitas
+            akibat dampak globalisasi dan perkembangan teknologi informasi.</p>
+
+        <!-- Tombol  -->
+        <div class="dropdown">
+            <button class="btn btn-danger dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                aria-expanded="false">
+                Perangkat
+            </button>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="/doc/ATP Sosiologi 2024-2025.pdf" target="_blank">ATP Sosiologi
+                        2024-2025</a>
+                </li>
+                <li><a class="dropdown-item" href="#modulajar">Modul Ajar</a>
+                </li>
+                <li><a class="dropdown-item"
+                        href="/doc/Buku Guru IPS - Buku Panduan Guru Ilmu Pengetahuan Sosial Tema 02 - Fase E.pdf"
+                        target="_blank">Buku Guru</a></li>
+                <li><a class="dropdown-item"
+                        href="/doc/Buku Murid IPS - Ilmu Pengetahuan Sosial Tema 02 - Fase E (1).pdf"
+                        target="_blank">Buku Siswa</a></li>
+                <li><a class="dropdown-item" href="#asesmen">Asesmen</a></li>
+            </ul>
+        </div>
+    </div>
+    <hr>
+    <!-- Capaian Pembelajaran End -->
+
+    `;
+    
+    document.getElementById("capaian-e-js").innerHTML = capaianeHTML;
+});
+
+// Capaian Pembelajaran Fase F
+document.addEventListener("DOMContentLoaded", function() {
+
+    const capaianfHTML=`
+
+    <!-- Capaian Pembelajaran Start -->
+    <div id="atas" class="container my-5">
+        <br><br>
+        <h1 class="mb-5 text-center fw-bold">SELAMAT DATANG DI FASE F</h1>
+        <h1 id="capaianpembelajaran">Capaian Pembelajaran</h1>
+        <p class="text-start">Pada akhir fase F, peserta didik mampu memahami berbagai permasalahan
+            sosial yang terjadi. Peserta didik juga mampu menerapkan prinsip kesetaraan dalam perbedaan sosial
+            sehingga terwujud kehidupan sosial yang harmonis, memahami penyebab konflik dan kekerasan serta upaya
+            untuk menciptakan integrasi sosial di tengah dinamika masyarakat digital yang terus berubah. Peserta
+            didik mampu memahami berbagai perubahan sosial, dan eksistensi kearifan lokal dalam kehidupan komunitas
+            akibat dampak globalisasi dan perkembangan teknologi informasi.</p>
+
+        <!-- Tombol  -->
+        <div class="dropdown">
+            <button class="btn btn-danger dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                aria-expanded="false">
+                Perangkat
+            </button>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="/doc/ATP Sosiologi 2024-2025.pdf" target="_blank">ATP Sosiologi
+                        2024-2025</a>
+                </li>
+                <li><a class="dropdown-item" href="#modulajar">Modul Ajar</a>
+                </li>
+                <li><a class="dropdown-item"
+                        href="/doc/Buku Guru IPS - Buku Panduan Guru Ilmu Pengetahuan Sosial Tema 02 - Fase E.pdf"
+                        target="_blank">Buku Guru</a></li>
+                <li><a class="dropdown-item"
+                        href="/doc/Buku Murid IPS - Ilmu Pengetahuan Sosial Tema 02 - Fase E (1).pdf"
+                        target="_blank">Buku Siswa</a></li>
+                <li><a class="dropdown-item" href="#asesmen">Asesmen</a></li>
+            </ul>
+        </div>
+    </div>
+    <hr>
+    <!-- Capaian Pembelajaran End -->
+    
+    `;
+
+    document.getElementById("capaian-f-js").innerHTML = capaianfHTML;
+
 });
 
         // Dark & Light Mode Toogle
