@@ -651,23 +651,48 @@
     </section>
 
     <!-- Modul -->
-    <div class="text-center">
-        <a class="btn btn-warning btn-lg" type="button"
-            href="https://www.canva.com/design/DAGJNQpWYVQ/fKNtnwYVoJfCEZTSE4G-Jw/edit" id="modulajar"
-            target="_blank">Lihat Modul Ajar</a>
+    <div class="container mt-5">
+        <div class="text-center card">
+            <div class="card-header">
+                <h4>Perangkat Pembelajaran</h4>
+            </div>
+            <div class="card-body">
+                <a class="btn btn-warning" type="button"
+                    href="https://www.canva.com/design/DAGJNQpWYVQ/fKNtnwYVoJfCEZTSE4G-Jw/edit" id="modulajar"
+                    target="_blank">Promes</a>
+                <a class="btn btn-warning" type="button"
+                    href="https://www.canva.com/design/DAGJNQpWYVQ/fKNtnwYVoJfCEZTSE4G-Jw/edit" id="modulajar"
+                    target="_blank">Modul Ajar</a>
+            </div>
+        </div>
     </div>
 
     <!-- Asesmen -->
     <div class="container" id="asesmen">
+
         <div class="card text-center my-5">
             <div class="card-header">
                 <h3>Asesmen</h3>
             </div>
             <div class="card-body">
 
+                <p class="text-start"><span class="fw-bold">Asesmen Formatif:</span> Digunakan untuk memantau dan
+                    mengevaluasi kemajuan belajar siswa
+                    selama proses
+                    pembelajaran berlangsung. Tujuannya adalah memberikan umpan balik yang dapat membantu siswa dan guru
+                    untuk memperbaiki dan meningkatkan proses belajar. Contohnya termasuk kuis, diskusi, dan tugas
+                    harian.</p>
+                <p class="text-start"><span class="fw-bold">Asesmen Sumatif:</span> Digunakan untuk menilai hasil
+                    belajar siswa pada
+                    akhir periode
+                    pembelajaran, seperti
+                    akhir semester atau akhir unit pelajaran. Tujuannya adalah untuk mengevaluasi sejauh mana siswa
+                    telah mencapai tujuan pembelajaran. Contohnya termasuk ujian akhir, proyek besar, atau presentasi.
+                </p>
+
                 <!-- Tombol Formatif -->
                 <div class="dropdown">
-                    <button id="formatif" class="btn btn-success dropdown-toggle m-3" type="button"
+                    <button id="formatif" class="btn btn-success dropdown-toggle" type="button"
                         data-bs-toggle="dropdown" aria-expanded="false">
                         Formatif
                     </button>
@@ -697,8 +722,8 @@
                     </ul>
 
                     <!-- Tombol Sumatif -->
-                    <button id="sumatif" class="btn btn-info dropdown-toggle m-3" type="button"
-                        data-bs-toggle="dropdown" aria-expanded="false">
+                    <button id="sumatif" class="btn btn-info dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                        aria-expanded="false">
                         Sumatif
                     </button>
                     <ul class="dropdown-menu">
@@ -718,7 +743,7 @@
             </div>
             <div class="card-footer">
                 <a href="https://docs.google.com/spreadsheets/d/1EtLuvkvD-yEW24R6z0zepfLK3x54hhsd_R072dOgcRQ/edit?usp=drive_link"
-                    class="btn btn-primary m-3 btn-lg" target="_blank">Lihat
+                    class="btn btn-primary m-3" target="_blank">Lihat
                     Nilai</a>
                 </a>
             </div>
@@ -727,9 +752,8 @@
 
     <!-- Tombol Daftar Isi -->
     <div class="btn-group text-centers dropup floating-btn">
-        <button type="button" class="text-uppercase fw-bold btn btn-success dropdown-toggle btn-lg"
-            data-bs-toggle="dropdown" aria-expanded="false">
-            Daftar Isi
+        <button type="button" class="text-uppercase fw-bold btn btn-danger dropdown-toggle" data-bs-toggle="dropdown"
+            aria-expanded="false"><i class="bi bi-list-ul"> </i>daftar isi
         </button>
         <ul class="dropdown-menu">
             <a class="fw-bold dropdown-item text-uppercase" href="#konsepkelompok">Kelompok Sosial</a>
