@@ -82,10 +82,6 @@ document.addEventListener("DOMContentLoaded", function() {
     `;
 
     const footerHTML =`   
-    <!-- footer -->
-        <!-- Tombol WA -->
-    <a class="btn btn-success floating-btn btn-lg" href="https://wa.me/6287765881000" target="_blank"><i
-            class="bi bi-whatsapp m-1"></i></a>
 
     <nav class="navbar navbar-expand-lg bg-body-tertiary mt-5">
         <div class="container-fluid">

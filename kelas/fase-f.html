@@ -78,20 +78,6 @@
     <section class="container" id="kelompoksosial">
         <h1 class="fw-bold text-center my-3">Kelompok Sosial</h1>
 
-        <p>Daftar Isi</p>
-        <ol>
-            <li><a class="link" href="#konsepkelompok">Konsep Kelompok Sosial</a></li>
-            <li><a class="link" href="#ragamkelompok">Ragam Kelompok Sosial</a></li>
-            <li><a class="link" href="#solidaritassosial">Solidaritas Sosial</a></li>
-            <li><a class="link" href="#dinamikakelompok">Dinamika Kelompok Sosial</a></li>
-        </ol>
-        <p>Daftar Tugas</p>
-        <ol>
-            <li><a class="link" href="#tugas1">Tugas 1 - Konsep Kelompok Sosial</a></li>
-            <li><a class="link" href="#tugas2">Tugas 2 - Ragam Kelompok Sosial</a></li>
-            <li><a class="link" href="#tugas3">Tugas 3 - Dinamika Kelompok Sosial</a></li>
-        </ol>
-
         <img src="https://cdn1-production-images-kly.akamaized.net/V1iAY-NfTLrJelT_SsN4YClljPI=/1200x675/smart/filters:quality(75):strip_icc():format(jpeg)/kly-media-production/medias/4512427/original/023370600_1690191500-20022739_6187153.jpg"
             alt="" class="img-thumbnail my-3" width="100%">
         <h2 class="text-center my-3" id="konsepkelompok">Konsep Kelompok Sosial</h2>
@@ -697,12 +683,13 @@
     </div> -->
 
     <!-- Asesmen Kelompok Sosial -->
-    <div class="container">
-        <div class="card text-center my-5" id="asesmen">
+    <div class="container" id="asesmen">
+        <div class="card text-center my-5">
             <div class="card-header">
                 <h3>Asesmen</h3>
             </div>
             <div class="card-body">
+
                 <!-- Tombol Formatif -->
                 <div class="dropdown">
                     <button id="formatif" class="btn btn-success dropdown-toggle m-3" type="button"
@@ -739,19 +726,19 @@
                         </li>
                     </ul>
 
+                    <!-- Tombol Sumatif -->
                     <button id="sumatif" class="btn btn-info dropdown-toggle m-3" type="button"
                         data-bs-toggle="dropdown" aria-expanded="false">
                         Sumatif
                     </button>
                     <ul class="dropdown-menu">
                         <li>
-                            <a class="dropdown-item disabled" aria-disabled="true"
-                                href="https://forms.gle/9jLAhsPGd4h6LSoA7" target="_blank">Ulangan
+                            <a class="dropdown-item" href="https://forms.gle/9jLAhsPGd4h6LSoA7" target="_blank">Ulangan
                                 Harian
                                 1 - Konsep & Ragam Kelompok Sosial</a>
                         </li>
                         <li>
-                            <a class="dropdown-item" href="#" target="_blank">Ulangan
+                            <a class="dropdown-item disabled" aria-disabled="true" href="#" target="_blank">Ulangan
                                 Harian 2 - Dinamika Kelompok Sosial</a>
                         </li>
                         <li>
@@ -779,6 +766,28 @@
                 </a>
             </div>
         </div>
+    </div>
+
+    <!-- Tombol Daftar Isi -->
+    <div class="btn-group dropup floating-btn">
+        <button type="button" class="text-uppercase fw-bold btn btn-success dropdown-toggle btn-lg"
+            data-bs-toggle="dropdown" aria-expanded="false">
+            Daftar Isi
+        </button>
+        <ul class="dropdown-menu">
+            <a class="fw-bold dropdown-item text-uppercase" href="#konsepkelompok">Kelompok Sosial</a>
+            <li><a class="dropdown-item" href="#konsepkelompok">Konsep Kelompok Sosial</a></li>
+            <li><a class="dropdown-item" href="#ragamkelompok">Ragam Kelompok Sosial</a></li>
+            <li><a class="dropdown-item" href="#solidaritassosial">Solidaritas Sosial</a></li>
+            <li><a class="dropdown-item" href="#dinamikakelompok">Dinamika Kelompok Sosial</a></li>
+            <br>
+            <a class="fw-bold dropdown-item text text-uppercase" href="#konsepmasalah">Masalah Sosial</a>
+            <li><a class="dropdown-item" href="#konsepmasalah">Konsep Masalah Sosial</a></li>
+            <li><a class="dropdown-item" href="#ragammasalah">Ragam Masalah solidaritassosial</a></li>
+            <li><a class="dropdown-item" href="#dinamikamasalah">Dinamika Masalah Sosial</a></li>
+            <br>
+            <li><a class="fw-bold dropdown-item text-uppercase" href="#asesmen">Asesmen Sumatif & Formatif</a></li>
+        </ul>
     </div>
 
     <!-- Akhir -->
