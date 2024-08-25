@@ -44,13 +44,30 @@ document.addEventListener("DOMContentLoaded", function() {
                     <li class="nav-item"><a class="nav-link" href="/index.html">Beranda</a></li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                            aria-expanded="false">Kelas
+                            aria-expanded="false">Materi
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end">
-                            <li><a class=" nav-link dropdown-item" href="/kelas/fase-e.html">Kelas 10</a>
+                            <li><a class="text-uppercase fw-bold nav-link dropdown-item" href="/kelas/fase-e.html">Kelas
+                                    10</a>
                             </li>
-                            <li><a class="nav-link dropdown-item" href="/kelas/fase-f.html">Kelas 11</a></li>
-                            <li><a class="nav-link dropdown-item" href="/kelas/fase-f2.html">Kelas 12</a></li>
+                            <li><a class="nav-link dropdown-item fw-bold text-uppercase" href="#">Kelas
+                                    11</a></li>
+                            <ol>
+                                <li><a class="nav-link dropdown-item" href="/kelas/fase-f-kelompoksosial.html">Kelompok
+                                        Sosial</a></li>
+                                <li><a class="nav-link dropdown-item" href="/kelas/fase-f-masalahsosial.html">Masalah
+                                        Sosial</a></li>
+                                <li><a class="nav-link dropdown-item" href="/kelas/fase-f-konfliksosial.html">Konflik
+                                        Sosial</a></li>
+                                <li><a class="nav-link dropdown-item" href="/kelas/fase-f-harmonisosial.html">Harmoni
+                                        Sosial</a></li>
+                            </ol>
+                            <li><a class="text-uppercase fw-bold nav-link dropdown-item"
+                                    href="#">Kelas 12</a></li>
+                            <ol>
+                                <li><a class="nav-link dropdown-item"
+                                        href="/kelas/fase-f2-perubahansosial.html">Perubahan
+                                        Sosial</a></li>
                         </ul>
                     </li>
                     <li class="nav-item dropdown">
@@ -70,8 +87,10 @@ document.addEventListener("DOMContentLoaded", function() {
                             aria-expanded="false">Sispala
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end">
-                            <li><a class="nav-link dropdown-item disabled" aria-disabled="true" href="/sispala/profile.html">profile</a></li>
-                            <li><a class="nav-link dropdown-item disabled" aria-disabled="true" href="/sispala/berita.html">berita</a></li>
+                            <li><a class="nav-link dropdown-item disabled" aria-disabled="true"
+                                    href="/sispala/profile.html">profile</a></li>
+                            <li><a class="nav-link dropdown-item disabled" aria-disabled="true"
+                                    href="/sispala/berita.html">berita</a></li>
                         </ul>
                     </li>
                 </ul>
