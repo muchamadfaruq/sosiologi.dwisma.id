@@ -14,3 +14,7 @@ h5,
 h6 {
   text-transform: capitalize;
 }
+
+li {
+  font-weight: bold;
+}
