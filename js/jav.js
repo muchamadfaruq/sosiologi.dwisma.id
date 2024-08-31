@@ -53,7 +53,9 @@ document.addEventListener("DOMContentLoaded", function() {
                             aria-expanded="false">Fase E
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end">
-                            <li><a class="nav-link dropdown-item" href="/materi/fase-e.html">Kelas X</a>
+                            <li><a class="nav-link dropdown-item" href="/materi/fase-e-ilmusosiologi.html">Ilmu Sosiologi</a>
+                            </li>
+                            <li><a class="nav-link dropdown-item" href="/materi/fase-e-hubungansosial.html">Hubungan Sosial</a>
                             </li>
                         </ul>
                     </li>
@@ -152,12 +154,13 @@ document.addEventListener("DOMContentLoaded", function() {
         <br><br>
         <h1 class="mb-5 text-center fw-bold">SELAMAT DATANG DI FASE E</h1>
         <h1 id="capaianpembelajaran">Capaian Pembelajaran</h1>
-        <p class="text-start">Pada akhir fase F, peserta didik mampu memahami berbagai permasalahan
-            sosial yang terjadi. Peserta didik juga mampu menerapkan prinsip kesetaraan dalam perbedaan sosial
-            sehingga terwujud kehidupan sosial yang harmonis, memahami penyebab konflik dan kekerasan serta upaya
-            untuk menciptakan integrasi sosial di tengah dinamika masyarakat digital yang terus berubah. Peserta
-            didik mampu memahami berbagai perubahan sosial, dan eksistensi kearifan lokal dalam kehidupan komunitas
-            akibat dampak globalisasi dan perkembangan teknologi informasi.</p>
+        <p class="text-start">Pada akhir fase ini, peserta didik mampu memahami fungsi
+        sosiologi sebagai ilmu yang secara kritis mengkaji masyarakat,
+        Disamping itu, peserta didik mampu mengenal identitas diri,
+        menjelaskan tindakan sosial, menjelaskan hubungan sosial,
+        menjelaskan peran lembaga sosial dalam mewujudkan tertib
+        sosial, dan memahami berbagai ragam gejala sosial yang ada di
+        masyarakat multikultural melalui konsep-konsep dasar sosiologi.</p>
 
         <!-- Tombol  -->
         <div class="dropdown">
