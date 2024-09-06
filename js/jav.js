@@ -104,6 +104,15 @@ document.addEventListener("DOMContentLoaded", function() {
                                     href="/sispala/berita.html">berita</a></li>
                         </ul>
                     </li>
+                        <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">Komunitas Belajar
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li><a class="nav-link dropdown-item"
+                                    href="/kombel/media-pembelajaran-digital.html">Media Pembelajaran Digital</a></li>
+                        </ul>
+                    </li>
                 </ul>
             </div>
         </div>
