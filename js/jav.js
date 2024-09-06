@@ -111,6 +111,8 @@ document.addEventListener("DOMContentLoaded", function() {
                         <ul class="dropdown-menu dropdown-menu-end">
                             <li><a class="nav-link dropdown-item"
                                     href="/kombel/media-pembelajaran-digital.html">Media Pembelajaran Digital</a></li>
+                                                                <li><a class="nav-link dropdown-item"
+                                    href="/kombel/model-pembelajaran.html">Model-model pembelajaran</a></li>
                         </ul>
                     </li>
                 </ul>
