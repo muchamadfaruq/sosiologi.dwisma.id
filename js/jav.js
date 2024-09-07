@@ -76,7 +76,7 @@ document.addEventListener("DOMContentLoaded", function() {
                                     Sosial</a>
                             <li><a class="nav-link dropdown-item" href="/materi/fase-f2-perubahansosial.html">Perubahan
                                     Sosial</a>
-                            <li><a class="nav-link dropdown-item" href="#">Globalisasi</a>
+                            <li><a class="nav-link dropdown-item" href="/materi/fase-f2-globalisasi.html">Globalisasi & Masyarakat Digital</a>
                             </li>
                         </ul>
                     </li>
