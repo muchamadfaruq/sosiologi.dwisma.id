@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", function() {
     <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>belajarsosiologi.my.id</title>
+    <title>sosiologi.dwisma.id</title>
 
     <!-- Botstrap -->
     <link href="/css/bootstrap.min.css" rel="stylesheet">
@@ -32,8 +32,8 @@ document.addEventListener("DOMContentLoaded", function() {
             </div>
 
             <!-- Logo -->
-            <div class="navbar-brand fw-bold text-primary" href="#">belajar<span
-                    class="text-danger">sosiologi.my.id</span>
+            <div class="navbar-brand fw-bold text-primary" href="#">sosiologi.<span
+                    class="text-danger">dwisma.id</span>
             </div>
 
             <!-- Humburger Menu -->
