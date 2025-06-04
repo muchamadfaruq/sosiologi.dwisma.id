@@ -242,7 +242,7 @@
 </head>
 
 <body>
-    <h1>Sumatif Akhir Tahun Sosiologi 2024/2025</h1>
+    <h1>Sumatif Akhir Semester Sosiologi 2024/2025</h1>
 
     <section id="modeToggleSection" aria-label="Pengaturan mode siswa dan guru">
         <input type="checkbox" id="studentModeToggle" checked aria-checked="true"
@@ -287,11 +287,31 @@
         <div class="no-data" id="noDataMessage">Belum ada data hasil ujian.</div>
     </div>
 
+    <!-- Firebase App (the core Firebase SDK) -->
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+
     <!-- SheetJS library CDN -->
     <script src="https://cdn.sheetjs.com/xlsx-latest/package/dist/shim.min.js"></script>
     <script src="https://cdn.sheetjs.com/xlsx-latest/package/dist/xlsx.full.min.js"></script>
 
     <script>
+        // TODO: Ganti config ini dengan config Firebase project Anda
+        const firebaseConfig = {
+            apiKey: "AIzaSyCQKhS-c29Sx2u-DzPcyURWAi-YZeQHP28",
+            authDomain: "database-ujian.firebaseapp.com",
+            projectId: "database-ujian",
+            storageBucket: "database-ujian.firebasestorage.app",
+            messagingSenderId: "872509400813",
+            appId: "1:872509400813:web:8df89f1dbe8cffdd804ee4",
+            measurementId: "G-WW8WTC14PR"
+        };
+
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.firestore();
+
+        // Elements
         const downloadBtn = document.getElementById('downloadTemplateBtn');
         const excelInput = document.getElementById('excelInput');
         const clearDataBtn = document.getElementById('clearDataBtn');
@@ -301,18 +321,18 @@
         const noDataMessage = document.getElementById('noDataMessage');
         const message = document.getElementById('message');
 
-        // Password prompt elements
         const passwordPrompt = document.getElementById('passwordPrompt');
         const passwordInput = document.getElementById('passwordInput');
         const passwordSubmitBtn = document.getElementById('passwordSubmitBtn');
         const passwordError = document.getElementById('passwordError');
 
-        let examResults = [];
-
-        // Simple password for mode guru - in real app, consider more secure method
+        // Password
         const GURU_PASSWORD = "guru123";
 
-        // Function to enable/disable controls based on toggle
+        // State
+        let examResults = [];
+
+        // Control buttons enable/disable based on mode
         function updateControls() {
             const disabled = modeToggle.checked;
             downloadBtn.disabled = disabled;
@@ -320,165 +340,55 @@
             clearDataBtn.disabled = disabled;
         }
 
-        // Initialize controls state
-        updateControls();
-
-        // When checkbox changes
-        modeToggle.addEventListener('change', (e) => {
-            if (!modeToggle.checked) {
-                e.preventDefault();
-                modeToggle.checked = true;
-                showPasswordPrompt();
-            } else {
-                updateControls();
-                message.textContent = 'Mode siswa diaktifkan: tombol unduh, unggah, dan hapus dinonaktifkan.';
-            }
-        });
-
-        function showPasswordPrompt() {
-            passwordError.textContent = '';
-            passwordInput.value = '';
-            passwordPrompt.style.display = 'block';
-            passwordInput.focus();
-        }
-
-        function hidePasswordPrompt() {
-            passwordPrompt.style.display = 'none';
-            passwordInput.value = '';
-            passwordError.textContent = '';
-        }
-
-        passwordSubmitBtn.addEventListener('click', verifyPassword);
-        passwordInput.addEventListener('keydown', (e) => {
-            if (e.key === 'Enter') {
-                verifyPassword();
-            }
-        });
-
-        function verifyPassword() {
-            const inputPass = passwordInput.value.trim();
-
-            if (inputPass === GURU_PASSWORD) {
-                hidePasswordPrompt();
-                modeToggle.checked = false;
-                updateControls();
-                message.textContent = 'Mode guru diaktifkan: tombol unduh, unggah, dan hapus aktif.';
-            } else {
-                passwordError.textContent = 'Password salah. Silakan coba lagi.';
-                passwordInput.focus();
-            }
-        }
-
-        // Download Excel template
-        downloadBtn.addEventListener('click', () => {
-            const wb = XLSX.utils.book_new();
-            const wsData = [
-                ["Kelas", "No Absen", "Nama Siswa", "Nilai", "Lulus/Remedial"],
-                ["XI IPA 1", 1, "Contoh Nama", 90, "Lulus"]
-            ];
-            const ws = XLSX.utils.aoa_to_sheet(wsData);
-            XLSX.utils.book_append_sheet(wb, ws, "TemplateHasilUjian");
-            XLSX.writeFile(wb, "template_hasil_ujian_siswa.xlsx");
-        });
-
-        // Handle Excel file upload and parse
-        excelInput.addEventListener('change', (e) => {
-            message.textContent = '';
-            const file = e.target.files[0];
-            if (!file) return;
-
-            const reader = new FileReader();
-            reader.onload = (evt) => {
-                const data = evt.target.result;
-                let workbook;
-                try {
-                    workbook = XLSX.read(data, { type: 'binary' });
-                } catch (error) {
-                    message.textContent = 'Gagal membaca file Excel. Pastikan file valid.';
-                    return;
-                }
-
-                const sheetName = workbook.SheetNames[0];
-                const worksheet = workbook.Sheets[sheetName];
-
-                const jsonData = XLSX.utils.sheet_to_json(worksheet, { defval: "" });
-
-                if (!jsonData || jsonData.length === 0) {
-                    message.textContent = "File Excel kosong atau tidak ada data.";
-                    clearTable();
-                    return;
-                }
-
-                const neededHeaders = ["Kelas", "No Absen", "Nama Siswa", "Nilai", "Lulus/Remedial"];
-                const firstRowKeys = Object.keys(jsonData[0]);
-                const missingHeaders = neededHeaders.filter(h => !firstRowKeys.includes(h));
-                if (missingHeaders.length > 0) {
-                    message.textContent = "File Excel harus mengandung header: " + missingHeaders.join(", ");
-                    clearTable();
-                    return;
-                }
-
-                const newResults = [];
-                let rowIndex = 1;
-                for (const row of jsonData) {
-                    rowIndex++;
-                    const className = row["Kelas"].toString().trim();
-                    const noAbsenRaw = row["No Absen"];
-                    const noAbsen = (typeof noAbsenRaw === 'number' || typeof noAbsenRaw === 'string') ? noAbsenRaw.toString().trim() : '';
-                    const studentName = row["Nama Siswa"].toString().trim();
-                    let score = Number(row["Nilai"]);
-                    const status = row["Lulus/Remedial"].toString().trim();
-
-                    if (!className || !noAbsen || !studentName || !status) {
-                        message.textContent = `Data tidak lengkap pada baris ${rowIndex}. Pastikan semua kolom diisi.`;
-                        clearTable();
-                        return;
-                    }
-
-                    if (isNaN(score) || score < 0 || score > 100) {
-                        message.textContent = `Nilai tidak valid pada baris ${rowIndex}. Harus angka antara 0 sampai 100.`;
-                        clearTable();
-                        return;
-                    }
-
-                    newResults.push({
-                        className,
-                        noAbsen,
-                        studentName,
-                        score,
-                        status
+        // Load data realtime from Firestore
+        function subscribeFirestore() {
+            db.collection('hasilUjianSosiologi').orderBy('noAbsen', 'asc')
+                .onSnapshot((snapshot) => {
+                    const results = [];
+                    snapshot.forEach(doc => {
+                        const data = doc.data();
+                        results.push({ id: doc.id, ...data });
                     });
-                }
+                    examResults = results;
+                    renderTable();
+                    const count = examResults.length;
+                    message.textContent = count > 0 ? `Memuat ${count} data hasil ujian.` : 'Belum ada data hasil ujian.';
+                }, (error) => {
+                    message.textContent = 'Gagal memuat data dari server: ' + error.message;
+                });
+        }
 
-                examResults = newResults;
-                renderTable();
-                message.textContent = `Berhasil memuat ${examResults.length} data hasil ujian dari file Excel.`;
-            };
+        // Save all data to Firestore (batch)
+        async function saveAllResultsToFirestore(results) {
+            const batch = db.batch();
+            // Hapus data lama dahulu (hati-hati)
+            const oldDocs = await db.collection('hasilUjianSosiologi').get();
+            oldDocs.forEach(doc => batch.delete(doc.ref));
+            // Tambah data baru
+            results.forEach((item) => {
+                const docRef = db.collection('hasilUjianSosiologi').doc();
+                batch.set(docRef, item);
+            });
+            await batch.commit();
+        }
 
-            reader.onerror = (error) => {
-                message.textContent = 'Gagal membaca file: ' + error;
-            };
+        // Clear Firestore data
+        async function clearFirestoreData() {
+            const snapshot = await db.collection('hasilUjianSosiologi').get();
+            const batch = db.batch();
+            snapshot.forEach(doc => batch.delete(doc.ref));
+            await batch.commit();
+        }
 
-            reader.readAsBinaryString(file);
-        });
-
-        clearDataBtn.addEventListener('click', () => {
-            examResults = [];
-            clearTable();
-            message.textContent = 'Data hasil ujian telah dihapus.';
-            excelInput.value = '';
-        });
-
+        // Render table
         function renderTable() {
             resultsTableBody.innerHTML = '';
-
             if (examResults.length === 0) {
                 noDataMessage.style.display = 'block';
                 return;
             } else {
                 noDataMessage.style.display = 'none';
             }
-
             examResults.forEach(result => {
                 const tr = document.createElement('tr');
                 tr.innerHTML = `
@@ -492,16 +402,170 @@
             });
         }
 
-        function clearTable() {
-            resultsTableBody.innerHTML = '';
-            noDataMessage.style.display = 'block';
-        }
-
+        // Escaping HTML
         function escapeHtml(text) {
             const div = document.createElement('div');
             div.textContent = text;
             return div.innerHTML;
         }
+
+        // Show/hide password dialog & logic
+        function showPasswordPrompt() {
+            passwordError.textContent = '';
+            passwordInput.value = '';
+            passwordPrompt.style.display = 'block';
+            passwordInput.focus();
+        }
+
+        function hidePasswordPrompt() {
+            passwordPrompt.style.display = 'none';
+            passwordInput.value = '';
+            passwordError.textContent = '';
+        }
+
+        // Initialization
+        updateControls();
+        subscribeFirestore();
+
+        modeToggle.addEventListener('change', (e) => {
+            if (!modeToggle.checked) {
+                e.preventDefault();
+                modeToggle.checked = true;
+                showPasswordPrompt();
+            } else {
+                updateControls();
+                message.textContent = 'Mode siswa diaktifkan: tombol unduh, unggah, dan hapus dinonaktifkan.';
+            }
+        });
+
+        passwordSubmitBtn.addEventListener('click', verifyPassword);
+        passwordInput.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') {
+                verifyPassword();
+            }
+        });
+
+        function verifyPassword() {
+            if (passwordInput.value.trim() === GURU_PASSWORD) {
+                hidePasswordPrompt();
+                modeToggle.checked = false;
+                updateControls();
+                message.textContent = 'Mode guru diaktifkan: tombol unduh, unggah, dan hapus aktif.';
+            } else {
+                passwordError.textContent = 'Password salah. Silakan coba lagi.';
+                passwordInput.focus();
+            }
+        }
+
+        downloadBtn.addEventListener('click', () => {
+            const wb = XLSX.utils.book_new();
+            const wsData = [
+                ["Kelas", "No Absen", "Nama Siswa", "Nilai", "Lulus/Remedial"],
+                ["XI IPA 1", 1, "Contoh Nama", 90, "Lulus"],
+            ];
+            const ws = XLSX.utils.aoa_to_sheet(wsData);
+            XLSX.utils.book_append_sheet(wb, ws, "TemplateHasilUjian");
+            XLSX.writeFile(wb, "template_hasil_ujian_siswa.xlsx");
+        });
+
+        excelInput.addEventListener('change', async (e) => {
+            message.textContent = '';
+            const file = e.target.files[0];
+            if (!file) return;
+            if (modeToggle.checked) {
+                message.textContent = "Mode siswa aktif, tidak bisa mengunggah data.";
+                return;
+            }
+
+            const reader = new FileReader();
+            reader.onload = async (evt) => {
+                const data = evt.target.result;
+                let workbook;
+                try {
+                    workbook = XLSX.read(data, { type: 'binary' });
+                } catch (err) {
+                    message.textContent = 'Gagal membaca file Excel. Pastikan file valid.';
+                    return;
+                }
+
+                const sheetName = workbook.SheetNames[0];
+                const worksheet = workbook.Sheets[sheetName];
+                const jsonData = XLSX.utils.sheet_to_json(worksheet, { defval: "" });
+
+                if (!jsonData || jsonData.length === 0) {
+                    message.textContent = "File Excel kosong atau tidak ada data.";
+                    return;
+                }
+
+                const neededHeaders = ["Kelas", "No Absen", "Nama Siswa", "Nilai", "Lulus/Remedial"];
+                const firstRowKeys = Object.keys(jsonData[0]);
+                const missingHeaders = neededHeaders.filter(h => !firstRowKeys.includes(h));
+                if (missingHeaders.length > 0) {
+                    message.textContent = "File Excel harus mengandung header: " + missingHeaders.join(", ");
+                    return;
+                }
+
+                // Validate and map
+                const newResults = [];
+                let rowIndex = 1;
+                for (const row of jsonData) {
+                    rowIndex++;
+                    const className = row["Kelas"].toString().trim();
+                    const noAbsenRaw = row["No Absen"];
+                    const noAbsen = (typeof noAbsenRaw === 'number' || typeof noAbsenRaw === 'string') ? noAbsenRaw.toString().trim() : '';
+                    const studentName = row["Nama Siswa"].toString().trim();
+                    let score = Number(row["Nilai"]);
+                    const status = row["Lulus/Remedial"].toString().trim();
+
+                    if (!className || !noAbsen || !studentName || !status) {
+                        message.textContent = `Data tidak lengkap pada baris ${rowIndex}. Pastikan semua kolom diisi.`;
+                        return;
+                    }
+
+                    if (isNaN(score) || score < 0 || score > 100) {
+                        message.textContent = `Nilai tidak valid pada baris ${rowIndex}. Harus angka antara 0 sampai 100.`;
+                        return;
+                    }
+
+                    newResults.push({
+                        className,
+                        noAbsen,
+                        studentName,
+                        score,
+                        status
+                    });
+                }
+
+                try {
+                    message.textContent = 'Menyimpan data ke server...';
+                    await saveAllResultsToFirestore(newResults);
+                    excelInput.value = ''; // reset input
+                    message.textContent = `Berhasil memuat ${newResults.length} data hasil ujian dan menyimpannya.`;
+                } catch (err) {
+                    message.textContent = 'Gagal menyimpan data ke server: ' + err.message;
+                }
+            };
+
+            reader.onerror = (error) => {
+                message.textContent = 'Gagal membaca file: ' + error;
+            };
+
+            reader.readAsBinaryString(file);
+        });
+
+        clearDataBtn.addEventListener('click', async () => {
+            if (modeToggle.checked) {
+                message.textContent = "Mode siswa aktif, tidak bisa menghapus data.";
+                return;
+            }
+            try {
+                message.textContent = 'Menghapus data dari server...';
+                await clearFirestoreData();
+                message.textContent = 'Data hasil ujian telah dihapus.';
+            } catch (err) {
+                message.textContent = 'Gagal menghapus data: ' + err.message;
+            }
+        });
     </script>
 </body>
 
