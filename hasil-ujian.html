@@ -195,7 +195,7 @@
             border-radius: 8px;
             display: none;
             z-index: 10;
-            width: 320px;
+            width: 340px;
             box-sizing: border-box;
         }
 
@@ -242,7 +242,7 @@
 </head>
 
 <body>
-    <h1>Hasil Sumatif Akhir Tahun Sosiologi 2024/2025</h1>
+    <h1>Sumatif Akhir Tahun Sosiologi 2024/2025</h1>
 
     <section id="modeToggleSection" aria-label="Pengaturan mode siswa dan guru">
         <input type="checkbox" id="studentModeToggle" checked aria-checked="true"
@@ -275,10 +275,11 @@
         <table aria-label="Tabel daftar hasil ujian siswa">
             <thead>
                 <tr>
-                    <th>Nama Siswa</th>
                     <th>Kelas</th>
+                    <th>No Absen</th>
+                    <th>Nama Siswa</th>
                     <th>Nilai</th>
-                    <th>Remedial/Lulus</th>
+                    <th>Lulus/Remedial</th>
                 </tr>
             </thead>
             <tbody id="resultsTableBody"></tbody>
@@ -324,20 +325,16 @@
 
         // When checkbox changes
         modeToggle.addEventListener('change', (e) => {
-            // If trying to disable mode siswa (going to mode guru)
             if (!modeToggle.checked) {
-                // Show password prompt and block toggle change until verified
                 e.preventDefault();
-                modeToggle.checked = true; // revert back while verifying
+                modeToggle.checked = true;
                 showPasswordPrompt();
             } else {
-                // Mode siswa diaktifkan, nonaktifkan tombol
                 updateControls();
                 message.textContent = 'Mode siswa diaktifkan: tombol unduh, unggah, dan hapus dinonaktifkan.';
             }
         });
 
-        // Show password prompt popup
         function showPasswordPrompt() {
             passwordError.textContent = '';
             passwordInput.value = '';
@@ -345,14 +342,12 @@
             passwordInput.focus();
         }
 
-        // Hide password prompt popup
         function hidePasswordPrompt() {
             passwordPrompt.style.display = 'none';
             passwordInput.value = '';
             passwordError.textContent = '';
         }
 
-        // Verifikasi password saat tekan tombol
         passwordSubmitBtn.addEventListener('click', verifyPassword);
         passwordInput.addEventListener('keydown', (e) => {
             if (e.key === 'Enter') {
@@ -365,7 +360,7 @@
 
             if (inputPass === GURU_PASSWORD) {
                 hidePasswordPrompt();
-                modeToggle.checked = false; // set ke mode guru
+                modeToggle.checked = false;
                 updateControls();
                 message.textContent = 'Mode guru diaktifkan: tombol unduh, unggah, dan hapus aktif.';
             } else {
@@ -374,19 +369,19 @@
             }
         }
 
-        // Download Excel template with headers (Remedial/Lulus replacing Tanggal Ujian)
+        // Download Excel template
         downloadBtn.addEventListener('click', () => {
             const wb = XLSX.utils.book_new();
             const wsData = [
-                ["Nama Siswa", "Kelas", "Nilai", "Remedial/Lulus"],
-                ["Contoh Nama", "XI IPA 1", 90, "Lulus"]
+                ["Kelas", "No Absen", "Nama Siswa", "Nilai", "Lulus/Remedial"],
+                ["XI IPA 1", 1, "Contoh Nama", 90, "Lulus"]
             ];
             const ws = XLSX.utils.aoa_to_sheet(wsData);
             XLSX.utils.book_append_sheet(wb, ws, "TemplateHasilUjian");
             XLSX.writeFile(wb, "template_hasil_ujian_siswa.xlsx");
         });
 
-        // Handle Excel file upload and parse (Remedial/Lulus)
+        // Handle Excel file upload and parse
         excelInput.addEventListener('change', (e) => {
             message.textContent = '';
             const file = e.target.files[0];
@@ -406,7 +401,6 @@
                 const sheetName = workbook.SheetNames[0];
                 const worksheet = workbook.Sheets[sheetName];
 
-                // Convert sheet to JSON object array with header row as keys
                 const jsonData = XLSX.utils.sheet_to_json(worksheet, { defval: "" });
 
                 if (!jsonData || jsonData.length === 0) {
@@ -415,8 +409,7 @@
                     return;
                 }
 
-                // Validate and normalize data
-                const neededHeaders = ["Nama Siswa", "Kelas", "Nilai", "Remedial/Lulus"];
+                const neededHeaders = ["Kelas", "No Absen", "Nama Siswa", "Nilai", "Lulus/Remedial"];
                 const firstRowKeys = Object.keys(jsonData[0]);
                 const missingHeaders = neededHeaders.filter(h => !firstRowKeys.includes(h));
                 if (missingHeaders.length > 0) {
@@ -425,18 +418,18 @@
                     return;
                 }
 
-                // Convert rows into examResults array
                 const newResults = [];
                 let rowIndex = 1;
                 for (const row of jsonData) {
                     rowIndex++;
-                    // Basic validations
-                    const studentName = row["Nama Siswa"].toString().trim();
                     const className = row["Kelas"].toString().trim();
+                    const noAbsenRaw = row["No Absen"];
+                    const noAbsen = (typeof noAbsenRaw === 'number' || typeof noAbsenRaw === 'string') ? noAbsenRaw.toString().trim() : '';
+                    const studentName = row["Nama Siswa"].toString().trim();
                     let score = Number(row["Nilai"]);
-                    const status = row["Remedial/Lulus"].toString().trim();
+                    const status = row["Lulus/Remedial"].toString().trim();
 
-                    if (!studentName || !className || !status) {
+                    if (!className || !noAbsen || !studentName || !status) {
                         message.textContent = `Data tidak lengkap pada baris ${rowIndex}. Pastikan semua kolom diisi.`;
                         clearTable();
                         return;
@@ -449,8 +442,9 @@
                     }
 
                     newResults.push({
-                        studentName,
                         className,
+                        noAbsen,
+                        studentName,
                         score,
                         status
                     });
@@ -472,7 +466,7 @@
             examResults = [];
             clearTable();
             message.textContent = 'Data hasil ujian telah dihapus.';
-            excelInput.value = ''; // reset file input
+            excelInput.value = '';
         });
 
         function renderTable() {
@@ -488,8 +482,9 @@
             examResults.forEach(result => {
                 const tr = document.createElement('tr');
                 tr.innerHTML = `
-          <td>${escapeHtml(result.studentName)}</td>
           <td>${escapeHtml(result.className)}</td>
+          <td>${escapeHtml(result.noAbsen)}</td>
+          <td>${escapeHtml(result.studentName)}</td>
           <td>${result.score}</td>
           <td>${escapeHtml(result.status)}</td>
         `;
@@ -502,7 +497,6 @@
             noDataMessage.style.display = 'block';
         }
 
-        // Escape HTML to prevent injection
         function escapeHtml(text) {
             const div = document.createElement('div');
             div.textContent = text;
