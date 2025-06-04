@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Sumatif Akhir Semester Sosiologi 2024/2025</title>
+    <style>
+        :root {
+            --primary-color: #4f46e5;
+            --secondary-color: #818cf8;
+            --bg-color: #f9fafb;
+            --text-color: #374151;
+            --header-bg: #4338ca;
+            --header-text: white;
+            --border-color: #e5e7eb;
+            --btn-bg: #4f46e5;
+            --btn-hover: #4338ca;
+            --btn-danger: #dc2626;
+            --btn-danger-hover: #b91c1c;
+            --disabled-bg: #9ca3af;
+            --disabled-text: #d1d5db;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            margin: 0;
+            padding: 2rem;
+            color: var(--text-color);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        h1 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        #modeToggleSection {
+            margin-bottom: 1rem;
+            max-width: 700px;
+            width: 100%;
+            background: white;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgb(0 0 0 / 0.05);
+            font-size: 1rem;
+            color: var(--primary-color);
+            user-select: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            position: relative;
+        }
+
+        #actionsSection {
+            background: white;
+            padding: 1rem 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgb(0 0 0 / 0.1);
+            max-width: 700px;
+            width: 100%;
+            margin-bottom: 1.5rem;
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        button,
+        input[type="file"] {
+            font-size: 1rem;
+            padding: 0.6rem 1rem;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button {
+            background-color: var(--btn-bg);
+            color: white;
+        }
+
+        button:hover:not(:disabled) {
+            background-color: var(--btn-hover);
+        }
+
+        #clearDataBtn {
+            background-color: var(--btn-danger);
+        }
+
+        #clearDataBtn:hover:not(:disabled) {
+            background-color: var(--btn-danger-hover);
+        }
+
+        button:disabled,
+        input[type="file"]:disabled {
+            background-color: var(--disabled-bg);
+            color: var(--disabled-text);
+            cursor: not-allowed;
+        }
+
+        input[type="file"] {
+            border: 1px solid var(--border-color);
+            background: white;
+            color: var(--text-color);
+        }
+
+        .table-container {
+            max-width: 900px;
+            width: 100%;
+            overflow-x: auto;
+            box-shadow: 0 4px 12px rgb(0 0 0 / 0.1);
+            background: white;
+            border-radius: 8px;
+            transition: opacity 0.4s ease;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 600px;
+        }
+
+        thead {
+            background-color: var(--header-bg);
+            color: var(--header-text);
+            text-align: left;
+        }
+
+        thead th {
+            padding: 12px 16px;
+        }
+
+        tbody td {
+            padding: 12px 16px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        tbody tr:hover {
+            background-color: var(--secondary-color);
+            color: white;
+            cursor: default;
+        }
+
+        @media (max-width: 600px) {
+            body {
+                padding: 1rem;
+            }
+
+            table {
+                min-width: 100%;
+            }
+
+            #actionsSection {
+                flex-direction: column;
+                gap: 0.8rem;
+            }
+
+            button,
+            input[type="file"] {
+                width: 100%;
+            }
+        }
+
+        .no-data {
+            text-align: center;
+            padding: 1.5rem;
+            color: var(--secondary-color);
+            font-style: italic;
+        }
+
+        #message {
+            margin-top: 1rem;
+            font-weight: 600;
+            color: var(--primary-color);
+            text-align: center;
+            min-height: 1.5em;
+        }
+
+        /* Password prompt styles */
+        #passwordPrompt {
+            position: absolute;
+            right: 0;
+            top: 100%;
+            margin-top: 0.4rem;
+            background: white;
+            padding: 0.7rem 1rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+            border-radius: 8px;
+            display: none;
+            z-index: 10;
+            width: 320px;
+            box-sizing: border-box;
+        }
+
+        #passwordPrompt label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 0.3rem;
+            color: var(--primary-color);
+        }
+
+        #passwordPrompt input[type="password"] {
+            width: 100%;
+            padding: 0.5rem;
+            font-size: 1rem;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            margin-bottom: 0.5rem;
+            box-sizing: border-box;
+        }
+
+        #passwordPrompt button {
+            width: 100%;
+            background-color: var(--btn-bg);
+            color: white;
+            padding: 0.6rem;
+            font-size: 1rem;
+            border-radius: 6px;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        #passwordPrompt button:hover {
+            background-color: var(--btn-hover);
+        }
+
+        #passwordError {
+            color: var(--btn-danger);
+            font-size: 0.9rem;
+            min-height: 1.2em;
+            margin-bottom: 0.4rem;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Hasil Sumatif Akhir Tahun Sosiologi 2024/2025</h1>
+
+    <section id="modeToggleSection" aria-label="Pengaturan mode siswa dan guru">
+        <input type="checkbox" id="studentModeToggle" checked aria-checked="true"
+            aria-label="Aktifkan mode siswa sehingga tombol unduh, unggah dan hapus data dinonaktifkan" />
+        <label for="studentModeToggle"
+            title="Aktifkan untuk menonaktifkan unduh, unggah, dan hapus data agar siswa tidak dapat mengubah data">Mode
+            Siswa (Nonaktifkan tombol unduh, unggah, dan hapus)</label>
+
+        <div id="passwordPrompt" role="dialog" aria-modal="true" aria-labelledby="passwordPromptLabel"
+            aria-describedby="passwordPromptDesc">
+            <label id="passwordPromptLabel" for="passwordInput">Masukkan Password Mode Guru</label>
+            <input id="passwordInput" type="password" autocomplete="current-password"
+                aria-describedby="passwordError" />
+            <div id="passwordError" aria-live="assertive"></div>
+            <button id="passwordSubmitBtn" type="button">Verifikasi</button>
+        </div>
+    </section>
+
+    <section id="actionsSection" aria-label="Unduh template, unggah file Excel, dan hapus data hasil ujian siswa">
+        <button id="downloadTemplateBtn" type="button" aria-label="Unduh template Excel hasil ujian siswa">Unduh
+            Template Excel</button>
+        <input type="file" id="excelInput" accept=".xls,.xlsx" aria-label="Unggah file Excel hasil ujian siswa" />
+        <button id="clearDataBtn" type="button" aria-label="Hapus data hasil ujian yang sudah dimuat">Hapus
+            Data</button>
+    </section>
+
+    <div id="message" role="alert" aria-live="assertive"></div>
+
+    <div class="table-container" aria-live="polite" aria-atomic="true">
+        <table aria-label="Tabel daftar hasil ujian siswa">
+            <thead>
+                <tr>
+                    <th>Nama Siswa</th>
+                    <th>Kelas</th>
+                    <th>Nilai</th>
+                    <th>Remedial/Lulus</th>
+                </tr>
+            </thead>
+            <tbody id="resultsTableBody"></tbody>
+        </table>
+        <div class="no-data" id="noDataMessage">Belum ada data hasil ujian.</div>
+    </div>
+
+    <!-- SheetJS library CDN -->
+    <script src="https://cdn.sheetjs.com/xlsx-latest/package/dist/shim.min.js"></script>
+    <script src="https://cdn.sheetjs.com/xlsx-latest/package/dist/xlsx.full.min.js"></script>
+
+    <script>
+        const downloadBtn = document.getElementById('downloadTemplateBtn');
+        const excelInput = document.getElementById('excelInput');
+        const clearDataBtn = document.getElementById('clearDataBtn');
+        const modeToggle = document.getElementById('studentModeToggle');
+
+        const resultsTableBody = document.getElementById('resultsTableBody');
+        const noDataMessage = document.getElementById('noDataMessage');
+        const message = document.getElementById('message');
+
+        // Password prompt elements
+        const passwordPrompt = document.getElementById('passwordPrompt');
+        const passwordInput = document.getElementById('passwordInput');
+        const passwordSubmitBtn = document.getElementById('passwordSubmitBtn');
+        const passwordError = document.getElementById('passwordError');
+
+        let examResults = [];
+
+        // Simple password for mode guru - in real app, consider more secure method
+        const GURU_PASSWORD = "guru123";
+
+        // Function to enable/disable controls based on toggle
+        function updateControls() {
+            const disabled = modeToggle.checked;
+            downloadBtn.disabled = disabled;
+            excelInput.disabled = disabled;
+            clearDataBtn.disabled = disabled;
+        }
+
+        // Initialize controls state
+        updateControls();
+
+        // When checkbox changes
+        modeToggle.addEventListener('change', (e) => {
+            // If trying to disable mode siswa (going to mode guru)
+            if (!modeToggle.checked) {
+                // Show password prompt and block toggle change until verified
+                e.preventDefault();
+                modeToggle.checked = true; // revert back while verifying
+                showPasswordPrompt();
+            } else {
+                // Mode siswa diaktifkan, nonaktifkan tombol
+                updateControls();
+                message.textContent = 'Mode siswa diaktifkan: tombol unduh, unggah, dan hapus dinonaktifkan.';
+            }
+        });
+
+        // Show password prompt popup
+        function showPasswordPrompt() {
+            passwordError.textContent = '';
+            passwordInput.value = '';
+            passwordPrompt.style.display = 'block';
+            passwordInput.focus();
+        }
+
+        // Hide password prompt popup
+        function hidePasswordPrompt() {
+            passwordPrompt.style.display = 'none';
+            passwordInput.value = '';
+            passwordError.textContent = '';
+        }
+
+        // Verifikasi password saat tekan tombol
+        passwordSubmitBtn.addEventListener('click', verifyPassword);
+        passwordInput.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') {
+                verifyPassword();
+            }
+        });
+
+        function verifyPassword() {
+            const inputPass = passwordInput.value.trim();
+
+            if (inputPass === GURU_PASSWORD) {
+                hidePasswordPrompt();
+                modeToggle.checked = false; // set ke mode guru
+                updateControls();
+                message.textContent = 'Mode guru diaktifkan: tombol unduh, unggah, dan hapus aktif.';
+            } else {
+                passwordError.textContent = 'Password salah. Silakan coba lagi.';
+                passwordInput.focus();
+            }
+        }
+
+        // Download Excel template with headers (Remedial/Lulus replacing Tanggal Ujian)
+        downloadBtn.addEventListener('click', () => {
+            const wb = XLSX.utils.book_new();
+            const wsData = [
+                ["Nama Siswa", "Kelas", "Nilai", "Remedial/Lulus"],
+                ["Contoh Nama", "XI IPA 1", 90, "Lulus"]
+            ];
+            const ws = XLSX.utils.aoa_to_sheet(wsData);
+            XLSX.utils.book_append_sheet(wb, ws, "TemplateHasilUjian");
+            XLSX.writeFile(wb, "template_hasil_ujian_siswa.xlsx");
+        });
+
+        // Handle Excel file upload and parse (Remedial/Lulus)
+        excelInput.addEventListener('change', (e) => {
+            message.textContent = '';
+            const file = e.target.files[0];
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = (evt) => {
+                const data = evt.target.result;
+                let workbook;
+                try {
+                    workbook = XLSX.read(data, { type: 'binary' });
+                } catch (error) {
+                    message.textContent = 'Gagal membaca file Excel. Pastikan file valid.';
+                    return;
+                }
+
+                const sheetName = workbook.SheetNames[0];
+                const worksheet = workbook.Sheets[sheetName];
+
+                // Convert sheet to JSON object array with header row as keys
+                const jsonData = XLSX.utils.sheet_to_json(worksheet, { defval: "" });
+
+                if (!jsonData || jsonData.length === 0) {
+                    message.textContent = "File Excel kosong atau tidak ada data.";
+                    clearTable();
+                    return;
+                }
+
+                // Validate and normalize data
+                const neededHeaders = ["Nama Siswa", "Kelas", "Nilai", "Remedial/Lulus"];
+                const firstRowKeys = Object.keys(jsonData[0]);
+                const missingHeaders = neededHeaders.filter(h => !firstRowKeys.includes(h));
+                if (missingHeaders.length > 0) {
+                    message.textContent = "File Excel harus mengandung header: " + missingHeaders.join(", ");
+                    clearTable();
+                    return;
+                }
+
+                // Convert rows into examResults array
+                const newResults = [];
+                let rowIndex = 1;
+                for (const row of jsonData) {
+                    rowIndex++;
+                    // Basic validations
+                    const studentName = row["Nama Siswa"].toString().trim();
+                    const className = row["Kelas"].toString().trim();
+                    let score = Number(row["Nilai"]);
+                    const status = row["Remedial/Lulus"].toString().trim();
+
+                    if (!studentName || !className || !status) {
+                        message.textContent = `Data tidak lengkap pada baris ${rowIndex}. Pastikan semua kolom diisi.`;
+                        clearTable();
+                        return;
+                    }
+
+                    if (isNaN(score) || score < 0 || score > 100) {
+                        message.textContent = `Nilai tidak valid pada baris ${rowIndex}. Harus angka antara 0 sampai 100.`;
+                        clearTable();
+                        return;
+                    }
+
+                    newResults.push({
+                        studentName,
+                        className,
+                        score,
+                        status
+                    });
+                }
+
+                examResults = newResults;
+                renderTable();
+                message.textContent = `Berhasil memuat ${examResults.length} data hasil ujian dari file Excel.`;
+            };
+
+            reader.onerror = (error) => {
+                message.textContent = 'Gagal membaca file: ' + error;
+            };
+
+            reader.readAsBinaryString(file);
+        });
+
+        clearDataBtn.addEventListener('click', () => {
+            examResults = [];
+            clearTable();
+            message.textContent = 'Data hasil ujian telah dihapus.';
+            excelInput.value = ''; // reset file input
+        });
+
+        function renderTable() {
+            resultsTableBody.innerHTML = '';
+
+            if (examResults.length === 0) {
+                noDataMessage.style.display = 'block';
+                return;
+            } else {
+                noDataMessage.style.display = 'none';
+            }
+
+            examResults.forEach(result => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+          <td>${escapeHtml(result.studentName)}</td>
+          <td>${escapeHtml(result.className)}</td>
+          <td>${result.score}</td>
+          <td>${escapeHtml(result.status)}</td>
+        `;
+                resultsTableBody.appendChild(tr);
+            });
+        }
+
+        function clearTable() {
+            resultsTableBody.innerHTML = '';
+            noDataMessage.style.display = 'block';
+        }
+
+        // Escape HTML to prevent injection
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+    </script>
+</body>
+
+</html>
